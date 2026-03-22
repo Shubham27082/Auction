@@ -70,6 +70,44 @@ public class PlayerService {
         return playerMapper.toResponse(getPlayerEntity(id));
     }
 
+    @Transactional
+    public PlayerResponse updatePlayer(Long id, PlayerRequest request) {
+        Player player = getPlayerEntity(id);
+        player.setPlayerName(request.getPlayerName());
+        player.setAge(request.getAge());
+        player.setRole(request.getRole());
+        player.setNativePlace(request.getNativePlace());
+        player.setCurrentAddress(request.getCurrentAddress());
+        player.setTeamRepresented(request.getTeamRepresented());
+        player.setDob(request.getDob());
+        player.setPhoneNumber(request.getPhoneNumber());
+        player.setContactNo(request.getContactNo());
+        player.setVillage(request.getVillage());
+        player.setBattingStyle(request.getBattingStyle());
+        player.setBowlingStyle(request.getBowlingStyle());
+        player.setJerseyName(request.getJerseyName());
+        player.setJerseyNumber(request.getJerseyNumber());
+        player.setJerseySize(request.getJerseySize());
+        player.setBasePrice(request.getBasePrice());
+        log.info("Updated player: {}", player.getPlayerName());
+        return playerMapper.toResponse(playerRepository.save(player));
+    }
+
+    @Transactional
+    public void deletePlayer(Long id) {
+        Player player = getPlayerEntity(id);
+        log.info("Deleting player: {}", player.getPlayerName());
+        playerRepository.delete(player);
+    }
+
+    @Transactional
+    public PlayerResponse updateStatus(Long id, PlayerStatus status) {
+        Player player = getPlayerEntity(id);
+        player.setStatus(status);
+        log.info("Updated player {} status to {}", player.getPlayerName(), status);
+        return playerMapper.toResponse(playerRepository.save(player));
+    }
+
     public Player getPlayerEntity(Long id) {
         return playerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Player", id));
@@ -81,10 +119,18 @@ public class PlayerService {
                 .age(request.getAge())
                 .role(request.getRole())
                 .nativePlace(request.getNativePlace())
+                .village(request.getVillage())
                 .currentAddress(request.getCurrentAddress())
                 .teamRepresented(request.getTeamRepresented())
                 .dob(request.getDob())
                 .phoneNumber(request.getPhoneNumber())
+                .contactNo(request.getContactNo())
+                .battingStyle(request.getBattingStyle())
+                .bowlingStyle(request.getBowlingStyle())
+                .jerseyName(request.getJerseyName())
+                .jerseyNumber(request.getJerseyNumber())
+                .jerseySize(request.getJerseySize())
+                .playerImage(request.getPlayerImage())
                 .basePrice(request.getBasePrice())
                 .status(PlayerStatus.AVAILABLE)
                 .build();

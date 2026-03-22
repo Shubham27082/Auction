@@ -35,6 +35,15 @@ public class PlayerRequest {
     @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Invalid phone number")
     private String phoneNumber;
 
+    private String contactNo;
+    private String village;
+    private String battingStyle;
+    private String bowlingStyle;
+    private String jerseyName;
+    private String jerseyNumber;
+    private String jerseySize;
+    private String playerImage;
+
     @NotNull(message = "Base price is required")
     @DecimalMin(value = "0.0", inclusive = false, message = "Base price must be positive")
     private BigDecimal basePrice;

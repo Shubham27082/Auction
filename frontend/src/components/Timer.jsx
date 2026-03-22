@@ -36,7 +36,7 @@ export default function Timer({ active, onExpire }) {
           <span className="text-2xl font-bold" style={{ color }}>{seconds}</span>
         </div>
       </div>
-      <span className="text-xs text-gray-400">seconds left</span>
+      <span className="text-xs text-gray-400 hidden">seconds left</span>
     </div>
   )
 }

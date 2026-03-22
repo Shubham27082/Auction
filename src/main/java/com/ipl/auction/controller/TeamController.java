@@ -50,4 +50,10 @@ public class TeamController {
     public ResponseEntity<ApiResponse<TeamResponse>> getTeamById(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.success(teamService.getTeamById(id)));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteTeam(@PathVariable Long id) {
+        teamService.deleteTeam(id);
+        return ResponseEntity.ok(ApiResponse.success("Team deleted", null));
+    }
 }

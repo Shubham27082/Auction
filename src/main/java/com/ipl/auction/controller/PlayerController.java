@@ -56,4 +56,24 @@ public class PlayerController {
     public ResponseEntity<ApiResponse<PlayerResponse>> getPlayerById(@PathVariable Long id) {
         return ResponseEntity.ok(ApiResponse.success(playerService.getPlayerById(id)));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponse<PlayerResponse>> updatePlayer(
+            @PathVariable Long id,
+            @Valid @RequestBody PlayerRequest request) {
+        return ResponseEntity.ok(ApiResponse.success("Player updated", playerService.updatePlayer(id, request)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deletePlayer(@PathVariable Long id) {
+        playerService.deletePlayer(id);
+        return ResponseEntity.ok(ApiResponse.success("Player deleted", null));
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<PlayerResponse>> updateStatus(
+            @PathVariable Long id,
+            @RequestParam PlayerStatus status) {
+        return ResponseEntity.ok(ApiResponse.success("Status updated", playerService.updateStatus(id, status)));
+    }
 }

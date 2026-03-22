@@ -39,6 +39,27 @@ public class Player {
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
 
+    @Column(name = "contact_no", length = 20)
+    private String contactNo;
+
+    @Column(name = "village", length = 150)
+    private String village;
+
+    @Column(name = "batting_style", length = 100)
+    private String battingStyle;
+
+    @Column(name = "bowling_style", length = 100)
+    private String bowlingStyle;
+
+    @Column(name = "jersey_name", length = 100)
+    private String jerseyName;
+
+    @Column(name = "jersey_number", length = 10)
+    private String jerseyNumber;
+
+    @Column(name = "jersey_size", length = 10)
+    private String jerseySize;
+
     @Column(name = "base_price", nullable = false, precision = 15, scale = 2)
     private BigDecimal basePrice;
 

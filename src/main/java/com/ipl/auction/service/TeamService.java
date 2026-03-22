@@ -73,6 +73,13 @@ public class TeamService {
         return response;
     }
 
+    @Transactional
+    public void deleteTeam(Long id) {
+        Team team = getTeamEntity(id);
+        log.info("Deleting team: {}", team.getTeamName());
+        teamRepository.delete(team);
+    }
+
     public Team getTeamEntity(Long id) {
         return teamRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Team", id));

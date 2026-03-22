@@ -18,6 +18,13 @@ public class PlayerResponse {
     private String teamRepresented;
     private LocalDate dob;
     private String phoneNumber;
+    private String contactNo;
+    private String village;
+    private String battingStyle;
+    private String bowlingStyle;
+    private String jerseyName;
+    private String jerseyNumber;
+    private String jerseySize;
     private BigDecimal basePrice;
     private String playerImage;
     private PlayerStatus status;

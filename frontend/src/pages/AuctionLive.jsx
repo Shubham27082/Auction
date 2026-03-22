@@ -98,10 +98,7 @@ export default function AuctionLive() {
                   )}
                 </div>
 
-                {/* Timer */}
-                <div className="shrink-0">
-                  <Timer active={isActive} onExpire={() => {}} />
-                </div>
+                {/* Timer removed */}
               </div>
             )}
           </div>

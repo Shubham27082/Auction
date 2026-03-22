@@ -12,3 +12,25 @@ export const formatDate = (dateStr) => {
 
 export const imgUrl = (path) =>
   path ? `http://localhost:8080/api/uploads/${path}` : null
+
+// Resolves any image source:
+// - Google Drive share links  → direct viewable URL
+// - Relative backend paths    → full URL via backend
+// - Already full URLs         → returned as-is
+export const resolveImage = (src) => {
+  if (!src) return null
+
+  // Google Drive: https://drive.google.com/open?id=FILE_ID
+  //            or https://drive.google.com/file/d/FILE_ID/view
+  const driveOpen = src.match(/drive\.google\.com\/open\?id=([^&]+)/)
+  if (driveOpen) return `https://drive.google.com/uc?export=view&id=${driveOpen[1]}`
+
+  const driveFile = src.match(/drive\.google\.com\/file\/d\/([^/]+)/)
+  if (driveFile) return `https://drive.google.com/uc?export=view&id=${driveFile[1]}`
+
+  // Already a full URL
+  if (src.startsWith('http://') || src.startsWith('https://')) return src
+
+  // Relative path → backend uploads
+  return `http://localhost:8080/api/uploads/${src}`
+}
